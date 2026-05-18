@@ -33,13 +33,9 @@ jobs:
           EOF
 
           chmod 600 ~/.oci/config
-
-          # Private Key 파일 생성 후 권한 제한 (소유자만 읽기 가능)
-          echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/private_key.pem
+          echo "${{ secrets.OCI_PRIVATE_KEY }}" | tr -d '\r' > ~/.oci/private_key.pem
           chmod 600 ~/.oci/private_key.pem
-
-          # SSH 공개키 임시 파일 생성
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > /tmp/ssh_key.pub
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" | tr -d '\r' > /tmp/ssh_key.pub
 
       # ③ 인스턴스 생성 시도 (핵심 단계)
       - name: 인스턴스 생성 시도
