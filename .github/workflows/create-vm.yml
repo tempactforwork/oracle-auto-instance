@@ -32,6 +32,8 @@ jobs:
           key_file=/home/runner/.oci/private_key.pem
           EOF
 
+          chmod 600 ~/.oci/config
+
           # Private Key 파일 생성 후 권한 제한 (소유자만 읽기 가능)
           echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/private_key.pem
           chmod 600 ~/.oci/private_key.pem
